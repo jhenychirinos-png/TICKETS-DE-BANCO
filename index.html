@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Ticket - Banco</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #004aad;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00337a;
+        }
+
+        .ticket {
+            background: #e9f1ff;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎟 Sistema de Ticket - Banco</h1>
+
+    <div class="container">
+        <h3>Generar Nuevo Ticket</h3>
+
+        <input type="text" id="nombre" placeholder="Nombre del cliente">
+
+        <select id="tramite">
+            <option value="">Seleccione un trámite</option>
+            <option>Depósito</option>
+            <option>Retiro</option>
+            <option>Consulta</option>
+            <option>Apertura de cuenta</option>
+        </select>
+
+        <button onclick="generarTicket()">Generar Ticket</button>
+
+        <div id="listaTickets"></div>
+    </div>
+
+    <script>
+        let contador = 1;
+
+        function generarTicket() {
+            const nombre = document.getElementById("nombre").value;
+            const tramite = document.getElementById("tramite").value;
+
+            if (nombre === "" || tramite === "") {
+                alert("Por favor complete todos los campos");
+                return;
+            }
+
+            const lista = document.getElementById("listaTickets");
+
+            const nuevoTicket = document.createElement("div");
+            nuevoTicket.classList.add("ticket");
+            nuevoTicket.innerHTML = `
+                <strong>Ticket #${contador}</strong><br>
+                Cliente: ${nombre}<br>
+                Trámite: ${tramite}
+            `;
+
+            lista.appendChild(nuevoTicket);
+
+            contador++;
+
+            document.getElementById("nombre").value = "";
+            document.getElementById("tramite").value = "";
+        }
+    </script>
+
+</body>
+</html>
